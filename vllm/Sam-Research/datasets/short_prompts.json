@@ -1,0 +1,62 @@
+[
+    {
+        "id": "short_1",
+        "prompt": "What is the capital of France?",
+        "expected_tokens": 5,
+        "category": "factual"
+    },
+    {
+        "id": "short_2", 
+        "prompt": "Write a short haiku about morning coffee.",
+        "expected_tokens": 20,
+        "category": "creative"
+    },
+    {
+        "id": "short_3",
+        "prompt": "Explain photosynthesis in one sentence.",
+        "expected_tokens": 25,
+        "category": "educational"
+    },
+    {
+        "id": "short_4",
+        "prompt": "How do you make scrambled eggs?",
+        "expected_tokens": 50,
+        "category": "instructional"
+    },
+    {
+        "id": "short_5",
+        "prompt": "What are the benefits of regular exercise?",
+        "expected_tokens": 75,
+        "category": "informational"
+    },
+    {
+        "id": "short_6",
+        "prompt": "Translate 'Hello, how are you?' to Spanish.",
+        "expected_tokens": 10,
+        "category": "translation"
+    },
+    {
+        "id": "short_7",
+        "prompt": "Write a brief product description for a wireless mouse.",
+        "expected_tokens": 40,
+        "category": "commercial"
+    },
+    {
+        "id": "short_8",
+        "prompt": "What is machine learning?",
+        "expected_tokens": 60,
+        "category": "technical"
+    },
+    {
+        "id": "short_9",
+        "prompt": "Give me 3 tips for better sleep.",
+        "expected_tokens": 45,
+        "category": "health"
+    },
+    {
+        "id": "short_10",
+        "prompt": "Summarize the plot of Romeo and Juliet in 2 sentences.",
+        "expected_tokens": 35,
+        "category": "literature"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "id": "long_1",
+        "prompt": "You are a financial advisor helping a 35-year-old professional plan for retirement. They earn $75,000 annually, have $15,000 in savings, $25,000 in a 401k, and want to retire at 65. They are risk-averse but understand the need for some growth. Create a comprehensive retirement planning strategy that includes investment allocation, savings goals, tax considerations, and milestone checkpoints. Explain your reasoning for each recommendation and provide specific actionable steps they can take in the next 6 months, 2 years, and 5 years. Also discuss potential risks and how to mitigate them, including market volatility, inflation, healthcare costs, and changes in employment. Finally, explain how they should adjust their strategy as they approach retirement age.",
+        "expected_tokens": 400,
+        "category": "financial_planning"
+    },
+    {
+        "id": "long_2",
+        "prompt": "Write a detailed technical analysis of the differences between microservices and monolithic architecture patterns in software development. Include discussions of scalability, maintainability, deployment complexity, debugging challenges, team organization implications, and performance considerations. Provide specific examples of when each pattern would be most appropriate, real-world case studies of companies that have successfully implemented each approach, and common pitfalls to avoid. Additionally, explain the role of containerization, service mesh technologies, and API gateways in microservices architectures. Conclude with recommendations for organizations considering migration from monolithic to microservices architecture, including assessment criteria, migration strategies, and success metrics.",
+        "expected_tokens": 450,
+        "category": "technical_analysis"
+    },
+    {
+        "id": "long_3",
+        "prompt": "Analyze the complex geopolitical implications of climate change on global food security over the next 30 years. Consider factors such as changing weather patterns, sea level rise, desertification, extreme weather events, and their impacts on agricultural productivity in different regions. Examine how these changes might affect international trade relationships, migration patterns, political stability, and potential conflicts over resources. Discuss the role of technological innovations in agriculture, such as vertical farming, genetically modified crops, and precision agriculture in mitigating these challenges. Evaluate current international cooperation efforts and policy frameworks, identifying strengths and gaps. Propose comprehensive strategies for enhancing global food security resilience, including adaptation measures, international cooperation mechanisms, and sustainable development approaches that balance environmental protection with food production needs.",
+        "expected_tokens": 500,
+        "category": "geopolitical_analysis"
+    },
+    {
+        "id": "long_4",
+        "prompt": "Design a comprehensive machine learning system for a healthcare organization that wants to improve patient diagnosis accuracy while ensuring data privacy and regulatory compliance. The system should analyze patient symptoms, medical history, lab results, and imaging data to provide diagnostic recommendations to physicians. Address the following requirements: data preprocessing and feature engineering strategies, appropriate ML algorithms for different types of medical data, model validation approaches that account for medical domain constraints, bias detection and mitigation techniques to ensure equitable care across different patient populations, interpretability methods that allow physicians to understand and trust the model's recommendations, data privacy techniques such as differential privacy and federated learning to protect patient information, compliance with regulations like HIPAA and FDA guidelines, integration challenges with existing hospital information systems, continuous learning capabilities to improve with new data while maintaining safety, and comprehensive testing and deployment strategies. Include specific technical implementation details, performance metrics relevant to healthcare applications, and risk assessment frameworks.",
+        "expected_tokens": 600,
+        "category": "healthcare_ai"
+    },
+    {
+        "id": "long_5",
+        "prompt": "Create a detailed business case for a sustainable urban development project in a mid-sized city that aims to revitalize a 50-acre brownfield site into a mixed-use eco-district. The project should integrate residential, commercial, and public spaces while implementing cutting-edge sustainability technologies and practices. Include market analysis of demographic trends, housing demand, and commercial viability. Develop a comprehensive sustainability framework covering renewable energy systems, water management including rainwater harvesting and greywater recycling, waste reduction and circular economy principles, green building standards and certifications, urban agriculture and food systems, transportation connectivity including public transit and bike infrastructure, and biodiversity conservation and green space integration. Address financing strategies including public-private partnerships, green bonds, tax incentives, and impact investment opportunities. Create a phased development timeline with key milestones, risk assessment including environmental, regulatory, and market risks with mitigation strategies, community engagement and stakeholder management plans, and success metrics for both financial returns and environmental impact. Consider regulatory requirements, zoning considerations, and potential challenges in implementation.",
+        "expected_tokens": 650,
+        "category": "urban_development"
+    }
+]
