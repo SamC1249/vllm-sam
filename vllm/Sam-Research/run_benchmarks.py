@@ -12,8 +12,24 @@ from pathlib import Path
 # Add the vLLM directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from Sam_Research.simple_llm_benchmark import SimpleBenchmark, BenchmarkConfig
-from Sam_Research.comprehensive_benchmark import ComprehensiveBenchmark, ComprehensiveConfig
+from simple_llm_benchmark import SimpleBenchmark, BenchmarkConfig
+from comprehensive_benchmark import ComprehensiveBenchmark, ComprehensiveConfig
+
+
+def setup_environment():
+    """Setup environment variables for benchmark execution."""
+    import torch
+    import os
+    
+    if torch.cuda.is_available():
+        os.environ['CUDA_VISIBLE_DEVICES'] = os.environ.get('CUDA_VISIBLE_DEVICES', '0')
+        os.environ['VLLM_DEVICE'] = 'cuda'
+    else:
+        os.environ['VLLM_DEVICE'] = 'cpu'
+        
+    # Disable Ray if causing issues
+    os.environ['VLLM_DISABLE_RAY'] = '1'
+    os.environ['RAY_USAGE_STATS_ENABLED'] = '0'
 
 
 def run_simple_benchmark(args):
@@ -120,6 +136,9 @@ def main():
     if not args.benchmark_type:
         parser.print_help()
         return
+    
+    # Setup environment before running any benchmarks
+    setup_environment()
     
     try:
         if args.benchmark_type == 'simple':

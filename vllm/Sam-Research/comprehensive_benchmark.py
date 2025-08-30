@@ -20,8 +20,8 @@ from collections import defaultdict
 import torch
 from vllm import LLM, SamplingParams
 
-from .simple_llm_benchmark import InstrumentedLLM, BenchmarkConfig
-from .enhanced_metrics import MetricsCollector
+from simple_llm_benchmark import InstrumentedLLM, BenchmarkConfig
+from enhanced_metrics import MetricsCollector
 
 
 # Set up logging
@@ -143,6 +143,19 @@ class ComprehensiveBenchmark:
     def __init__(self, config: Optional[ComprehensiveConfig] = None):
         self.config = config or ComprehensiveConfig()
         self.results: Dict[str, TestResults] = {}
+        self._setup_environment()
+    
+    def _setup_environment(self):
+        """Setup proper device environment for comprehensive benchmarking."""
+        if torch.cuda.is_available():
+            os.environ['CUDA_VISIBLE_DEVICES'] = os.environ.get('CUDA_VISIBLE_DEVICES', '0')
+            os.environ['VLLM_DEVICE'] = 'cuda'
+        else:
+            os.environ['VLLM_DEVICE'] = 'cpu'
+            
+        # Disable Ray if causing issues
+        os.environ['VLLM_DISABLE_RAY'] = '1'
+        os.environ['RAY_USAGE_STATS_ENABLED'] = '0'
         
     def _load_dataset(self, dataset_name: str) -> List[Dict[str, Any]]:
         """Load specified dataset."""
