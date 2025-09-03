@@ -10,7 +10,7 @@ import time
 import traceback
 from pathlib import Path
 
-print("🔧 Device Configuration Diagnostic Test")
+print("Device Configuration Diagnostic Test")
 print("=" * 50)
 
 # Step 1: Check environment before any imports
@@ -24,17 +24,17 @@ print(f"   RAY_USAGE_STATS_ENABLED: {os.environ.get('RAY_USAGE_STATS_ENABLED', '
 print("\n2. TORCH & CUDA CHECK:")
 try:
     import torch
-    print(f"   ✅ PyTorch version: {torch.__version__}")
-    print(f"   ✅ CUDA available: {torch.cuda.is_available()}")
+    print(f"   OK PyTorch version: {torch.__version__}")
+    print(f"   OK CUDA available: {torch.cuda.is_available()}")
     if torch.cuda.is_available():
-        print(f"   ✅ CUDA version: {torch.version.cuda}")
-        print(f"   ✅ GPU count: {torch.cuda.device_count()}")
+        print(f"   OK CUDA version: {torch.version.cuda}")
+        print(f"   OK GPU count: {torch.cuda.device_count()}")
         for i in range(torch.cuda.device_count()):
             print(f"      - GPU {i}: {torch.cuda.get_device_name(i)}")
     else:
-        print("   ⚠️  CUDA not available - will use CPU mode")
+        print("   WARNING: CUDA not available - will use CPU mode")
 except Exception as e:
-    print(f"   ❌ Torch import failed: {e}")
+    print(f"   ERROR: Torch import failed: {e}")
     sys.exit(1)
 
 # Step 3: Manual device environment setup
@@ -67,10 +67,12 @@ setup_device_environment()
 print("\n4. VLLM IMPORT TEST:")
 try:
     from vllm import LLM, SamplingParams
-    print("   ✅ vLLM imported successfully")
+    print("   OK: vLLM imported successfully")
 except Exception as e:
-    print(f"   ❌ vLLM import failed: {e}")
+    print(f"   ERROR: vLLM import failed: {e}")
     traceback.print_exc()
+    print("\n   SYSTEM ISSUE: vLLM is not installed or not accessible.")
+    print("   This needs to be fixed before continuing.")
     sys.exit(1)
 
 # Step 5: Test basic vLLM initialization with explicit device configuration
@@ -91,11 +93,11 @@ def test_vllm_initialization():
             enforce_eager=True,
             max_model_len=256,
         )
-        print("   ✅ Default initialization succeeded")
+        print("   OK: Default initialization succeeded")
         del llm  # Clean up
         return True
     except Exception as e:
-        print(f"   ❌ Default initialization failed: {e}")
+        print(f"   ERROR: Default initialization failed: {e}")
         print("   Full error:")
         traceback.print_exc()
     
@@ -111,11 +113,11 @@ def test_vllm_initialization():
             enforce_eager=True,
             max_model_len=256,
         )
-        print(f"   ✅ Explicit device={device} initialization succeeded")
+        print(f"   OK: Explicit device={device} initialization succeeded")
         del llm  # Clean up
         return True
     except Exception as e:
-        print(f"   ❌ Explicit device initialization failed: {e}")
+        print(f"   ERROR: Explicit device initialization failed: {e}")
         print("   Full error:")
         traceback.print_exc()
     
@@ -134,7 +136,7 @@ def test_vllm_initialization():
             enforce_eager=True,
             max_model_len=256,
         )
-        print("   ✅ CPU mode initialization succeeded")
+        print("   OK: CPU mode initialization succeeded")
         del llm  # Clean up
         
         # Restore original device setting
@@ -143,7 +145,7 @@ def test_vllm_initialization():
         
         return True
     except Exception as e:
-        print(f"   ❌ CPU mode initialization failed: {e}")
+        print(f"   ERROR: CPU mode initialization failed: {e}")
         print("   Full error:")
         traceback.print_exc()
     
@@ -157,21 +159,23 @@ if success:
     try:
         # Add current directory to path for imports
         current_dir = Path(__file__).parent
-        sys.path.insert(0, str(current_dir))
+        if str(current_dir) not in sys.path:
+            sys.path.insert(0, str(current_dir))
         
+        # Try to import enhanced_metrics
         from enhanced_metrics import MetricsCollector
         collector = MetricsCollector()
-        print("   ✅ Enhanced metrics imported and initialized")
+        print("   OK: Enhanced metrics imported and initialized")
         
         # Test request tracking
         request_id = "device_test"
         metrics = collector.start_request_tracking(request_id)
         time.sleep(0.01)
         final_metrics = collector.complete_request(request_id, output_tokens=1)
-        print("   ✅ Basic metrics tracking works")
+        print("   OK: Basic metrics tracking works")
         
     except Exception as e:
-        print(f"   ❌ Enhanced metrics test failed: {e}")
+        print(f"   ERROR: Enhanced metrics test failed: {e}")
         traceback.print_exc()
         success = False
 
@@ -181,7 +185,7 @@ print("7. DIAGNOSTIC SUMMARY:")
 print("=" * 50)
 
 if success:
-    print("✅ ALL TESTS PASSED!")
+    print("SUCCESS: ALL TESTS PASSED!")
     print("\nThe device configuration appears to be working correctly.")
     print("If you're still getting the 'Device string must not be empty' error,")
     print("it might be occurring in a different part of the code.")
@@ -190,7 +194,7 @@ if success:
     print("2. If this passes, try the lightweight test: python vllm/Sam-Research/test_framework.py")
     print("3. Compare the environment variables and initialization patterns")
 else:
-    print("❌ TESTS FAILED!")
+    print("FAILURE: TESTS FAILED!")
     print("\nThe device configuration needs additional fixes.")
     print("Common issues:")
     print("- VLLM_DEVICE environment variable not properly set")
